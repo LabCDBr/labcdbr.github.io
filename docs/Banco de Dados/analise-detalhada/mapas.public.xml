@@ -239,7 +239,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="db_update" numRows="132" remarks="" schema="public" type="TABLE">
+      <table name="db_update" numRows="149" remarks="" schema="public" type="TABLE">
          <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="name" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
             <child column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="agent"/>
             <child column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="evaluation_method_configuration"/>
@@ -274,6 +274,16 @@
          <index name="entity_revision_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
+         <index name="entity_revision_object" unique="false">
+            <column ascending="true" name="object_type"/>
+            <column ascending="true" name="object_id"/>
+         </index>
+         <index name="entity_revision_object_id" unique="false">
+            <column ascending="true" name="object_id"/>
+         </index>
+         <index name="entity_revision_object_type" unique="false">
+            <column ascending="true" name="object_type"/>
+         </index>
       </table>
       <table name="entity_revision_data" numRows="10" remarks="" schema="public" type="TABLE">
          <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
@@ -285,6 +295,12 @@
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="entity_revision_data_pkey" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="entity_revision_data_id" unique="false">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="entity_revision_data_key" unique="false">
+            <column ascending="true" name="key"/>
          </index>
       </table>
       <table name="entity_revision_revision_data" numRows="10" remarks="" schema="public" type="TABLE">
@@ -299,6 +315,12 @@
          <index name="entity_revision_revision_data_pkey" unique="true">
             <column ascending="true" name="revision_id"/>
             <column ascending="true" name="revision_data_id"/>
+         </index>
+         <index name="entity_revision_revision_data_data_id" unique="false">
+            <column ascending="true" name="revision_data_id"/>
+         </index>
+         <index name="entity_revision_revision_data_revision_id" unique="false">
+            <column ascending="true" name="revision_id"/>
          </index>
       </table>
       <table name="evaluation_method_configuration" remarks="" schema="public" type="TABLE">
@@ -543,6 +565,13 @@
             <column ascending="true" name="object_type"/>
             <column ascending="true" name="object_id"/>
          </index>
+         <index name="file_parent_idx" unique="false">
+            <column ascending="true" name="parent_id"/>
+         </index>
+         <index name="file_parent_object_type_idx" unique="false">
+            <column ascending="true" name="parent_id"/>
+            <column ascending="true" name="object_type"/>
+         </index>
       </table>
       <table name="geo_division" remarks="" schema="public" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('geo_division_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
@@ -559,7 +588,7 @@
             <column ascending="true" name="geom"/>
          </index>
          <checkConstraint constraint="((st_ndims(geom) = 2))" name="enforce_dims_geom"/>
-         <checkConstraint constraint="(((geometrytype(geom) = 'MULTIPOLYGON'::text) OR (geom IS NULL)))" name="enforce_geotype_geom"/>
+         <checkConstraint constraint="(((geometrytype(geom) = 'MULTIPOLYGON'::text) OR (geometrytype(geom) = 'POLYGON'::text) OR (geom IS NULL)))" name="enforce_geotype_geom"/>
          <checkConstraint constraint="((st_srid(geom) = 4326))" name="enforce_srid_geom"/>
       </table>
       <table name="geography_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS f_table_catalog,&#10;    n.nspname AS f_table_schema,&#10;    c.relname AS f_table_name,&#10;    a.attname AS f_geography_column,&#10;    postgis_typmod_dims(a.atttypmod) AS coord_dimension,&#10;    postgis_typmod_srid(a.atttypmod) AS srid,&#10;    postgis_typmod_type(a.atttypmod) AS type&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n&#10;  WHERE ((t.typname = 'geography'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND (c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
@@ -712,6 +741,8 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="17" name="avaliable_evaluation_fields" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
          <column autoUpdated="false" defaultValue="null" digits="6" id="18" name="publish_timestamp" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
          <column autoUpdated="false" defaultValue="false" digits="0" id="19" name="auto_publish" nullable="false" remarks="" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="20" name="registration_proponent_types" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="21" name="registration_ranges" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="opportunity_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -764,6 +795,9 @@
          </index>
          <index name="idx_3d853098a76ed395" unique="false">
             <column ascending="true" name="user_id"/>
+         </index>
+         <index name="pcache_action_idx" unique="false">
+            <column ascending="true" name="action"/>
          </index>
          <index name="pcache_owner_idx" unique="false">
             <column ascending="true" name="object_type"/>
@@ -906,6 +940,10 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="number" nullable="true" remarks="" size="24" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="'{&quot;include&quot;: [], &quot;exclude&quot;: []}'::text" digits="0" id="11" name="valuers_exceptions_list" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="space_data" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="proponent_type" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="range" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="17" id="15" name="score" nullable="true" remarks="" size="17" type="float8" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="eligible" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="registration_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -918,6 +956,27 @@
          </index>
          <index name="idx_62a8a7a7c79c849a" unique="false">
             <column ascending="true" name="subsite_id"/>
+         </index>
+         <index name="registration_category_idx" unique="false">
+            <column ascending="true" name="category"/>
+         </index>
+         <index name="registration_eligible_idx" unique="false">
+            <column ascending="true" name="eligible"/>
+         </index>
+         <index name="registration_number_idx" unique="false">
+            <column ascending="true" name="number"/>
+         </index>
+         <index name="registration_proponent_type_idx" unique="false">
+            <column ascending="true" name="proponent_type"/>
+         </index>
+         <index name="registration_range_idx" unique="false">
+            <column ascending="true" name="range"/>
+         </index>
+         <index name="registration_score_idx" unique="false">
+            <column ascending="true" name="score"/>
+         </index>
+         <index name="registration_status_idx" unique="false">
+            <column ascending="true" name="status"/>
          </index>
       </table>
       <table name="registration_evaluation" remarks="" schema="public" type="TABLE">
@@ -961,6 +1020,8 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="conditional" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="conditional_field" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="conditional_value" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="registration_ranges" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="proponent_types" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="registration_field_configuration_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -985,6 +1046,8 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="conditional" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="conditional_field" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
          <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="conditional_value" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="registration_ranges" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="proponent_types" nullable="true" remarks="" size="2147483647" type="json" typeCode="1111"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="registration_file_configuration_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -2526,6 +2589,26 @@ END;]]></definition>
                             (origin_type=_p_type AND origin_id=OLD.id) OR
                             (destination_type=_p_type AND destination_id=OLD.id);
                         RETURN NULL;
+                    END;]]></definition>
+         <parameters>
+            <parameter mode="IN"/>
+         </parameters>
+      </routine>
+      <routine dataAccess="MODIFIES" deterministic="false" name="fn_propagate_opportunity_update()" returnType="trigger" securityType="INVOKER" type="FUNCTION">
+         <comment/>
+         <definition language="plpgsql"><![CDATA[BEGIN
+                        UPDATE opportunity
+                        SET 
+                            registration_ranges = NEW.registration_ranges,
+                            registration_categories = NEW.registration_categories,
+                            registration_proponent_types = NEW.registration_proponent_types
+                        WHERE (parent_id = OLD.id OR id = OLD.parent_id)
+                        AND (
+                            registration_ranges::jsonb IS DISTINCT FROM NEW.registration_ranges::jsonb OR
+                            registration_categories::jsonb IS DISTINCT FROM NEW.registration_categories::jsonb OR
+                            registration_proponent_types::jsonb IS DISTINCT FROM NEW.registration_proponent_types::jsonb
+                        );
+                        RETURN NEW;
                     END;]]></definition>
          <parameters>
             <parameter mode="IN"/>

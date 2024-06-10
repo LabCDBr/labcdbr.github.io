@@ -381,6 +381,18 @@
                                     <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
                                     <td>object_type + object_id</td>
                                 </tr>
+                                <tr>
+                                    <td title='Indexed'>file_parent_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>parent_id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>file_parent_object_type_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+                                    <td>parent_id + object_type</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div><!-- /.box-body -->
@@ -405,30 +417,30 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="file.html" target="_top" title="file" alt="" coords="48,29,406,451">
+<area shape="rect" id="node1" href="file.html" target="_top" title="file" alt="" coords="50,29,426,451">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/file.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="oneimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagramImplied" name="oneDegreeRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="file.html" target="_top" title="file" alt="" coords="203,29,561,451">
-<area shape="rect" id="node2" href="db_update.html" target="_top" title="db_update" alt="" coords="5,120,159,237">
+<area shape="rect" id="node1" href="file.html" target="_top" title="file" alt="" coords="212,29,588,451">
+<area shape="rect" id="node2" href="db_update.html" target="_top" title="db_update" alt="" coords="5,120,168,237">
 </map>
                                         <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/file.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twoimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagramImplied" name="twoDegreesRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="agent.html" target="_top" title="agent" alt="" coords="605,248,735,336">
-<area shape="rect" id="node2" href="db_update.html" target="_top" title="db_update" alt="" coords="5,332,159,450">
-<area shape="rect" id="node3" href="subsite.html" target="_top" title="subsite" alt="" coords="317,248,447,336">
-<area shape="rect" id="node4" href="evaluation_method_configuration.html" target="_top" title="evaluation_method_configuration" alt="" coords="984,458,1313,546">
-<area shape="rect" id="node5" href="opportunity.html" target="_top" title="opportunity" alt="" coords="779,424,940,512">
-<area shape="rect" id="node6" href="event.html" target="_top" title="event" alt="" coords="1091,71,1206,159">
-<area shape="rect" id="node7" href="project.html" target="_top" title="project" alt="" coords="796,36,923,124">
-<area shape="rect" id="node8" href="file.html" target="_top" title="file" alt="" coords="203,590,561,1011">
-<area shape="rect" id="node9" href="seal.html" target="_top" title="seal" alt="" coords="799,178,920,266">
-<area shape="rect" id="node10" href="space.html" target="_top" title="space" alt="" coords="800,319,919,407">
-<area shape="rect" id="node11" href="system_role.html" target="_top" title="system_role" alt="" coords="299,1028,465,1116">
+<area shape="rect" id="node1" href="agent.html" target="_top" title="agent" alt="" coords="632,226,767,314">
+<area shape="rect" id="node2" href="db_update.html" target="_top" title="db_update" alt="" coords="5,291,168,408">
+<area shape="rect" id="node3" href="subsite.html" target="_top" title="subsite" alt="" coords="331,259,469,347">
+<area shape="rect" id="node4" href="evaluation_method_configuration.html" target="_top" title="evaluation_method_configuration" alt="" coords="1031,11,1380,99">
+<area shape="rect" id="node5" href="opportunity.html" target="_top" title="opportunity" alt="" coords="811,47,987,135">
+<area shape="rect" id="node6" href="event.html" target="_top" title="event" alt="" coords="1143,291,1268,379">
+<area shape="rect" id="node7" href="project.html" target="_top" title="project" alt="" coords="831,152,967,240">
+<area shape="rect" id="node8" href="file.html" target="_top" title="file" alt="" coords="212,424,588,846">
+<area shape="rect" id="node9" href="seal.html" target="_top" title="seal" alt="" coords="835,435,962,523">
+<area shape="rect" id="node10" href="space.html" target="_top" title="space" alt="" coords="836,294,961,382">
+<area shape="rect" id="node11" href="system_role.html" target="_top" title="system_role" alt="" coords="313,935,487,1023">
 </map>
                                         <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/file.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>

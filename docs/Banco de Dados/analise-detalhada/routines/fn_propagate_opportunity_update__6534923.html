@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>fn_clean_orphans()</h1><br />
+                    <h1>fn_propagate_opportunity_update()</h1><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <textarea id="sql-script-codemirror" name="sql-script-codemirror" rows="" style="display: none;">DECLARE _p_type VARCHAR;&#10;                    BEGIN&#10;                        _p_type&#61;TG_ARGV[0];&#10;                        DELETE FROM agent_relation WHERE&#10;                            object_type::varchar&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM seal_relation WHERE&#10;                            object_type&#61;_p_type AND object_id&#61;OLD.id;   &#10;                        DELETE FROM space_relation WHERE&#10;                            object_type&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM term_relation WHERE&#10;                            object_type::varchar&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM metalist WHERE&#10;                            object_type&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM file WHERE&#10;                            object_type::varchar&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM chat_thread WHERE&#10;                            object_type&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM pcache WHERE&#10;                            object_type::varchar&#61;_p_type AND object_id&#61;OLD.id;&#10;                        DELETE FROM request WHERE&#10;                            (origin_type&#61;_p_type AND origin_id&#61;OLD.id) OR&#10;                            (destination_type&#61;_p_type AND destination_id&#61;OLD.id);&#10;                        RETURN NULL;&#10;                    END;</textarea>
+                            <textarea id="sql-script-codemirror" name="sql-script-codemirror" rows="" style="display: none;">BEGIN&#10;                        UPDATE opportunity&#10;                        SET &#10;                            registration_ranges &#61; NEW.registration_ranges,&#10;                            registration_categories &#61; NEW.registration_categories,&#10;                            registration_proponent_types &#61; NEW.registration_proponent_types&#10;                        WHERE (parent_id &#61; OLD.id OR id &#61; OLD.parent_id)&#10;                        AND (&#10;                            registration_ranges::jsonb IS DISTINCT FROM NEW.registration_ranges::jsonb OR&#10;                            registration_categories::jsonb IS DISTINCT FROM NEW.registration_categories::jsonb OR&#10;                            registration_proponent_types::jsonb IS DISTINCT FROM NEW.registration_proponent_types::jsonb&#10;                        );&#10;                        RETURN NEW;&#10;                    END;</textarea>
                         </div>
                     </div>
                 </section>

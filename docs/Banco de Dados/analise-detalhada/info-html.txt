@@ -1,5 +1,5 @@
-date=2023-11-23 15:04:49-0300
-os=Mac OS X 13.6.1
+date=2024-06-10 21:06:58+0000
+os=Linux 6.1.0-21-amd64
 schemaspy-version=6.2.4
 schemaspy-build=6.2.4.41 2023-07-21 11:15:12
-renderer=Graphviz dot 9.0.0 
+renderer=Graphviz dot 2.47.1 

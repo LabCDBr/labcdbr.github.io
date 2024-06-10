@@ -281,16 +281,16 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>enforce_geotype_geom</td>
-                                    <td>(((geometrytype(geom) &#61; &#39;MULTIPOLYGON&#39;::text) OR (geom IS NULL)))</td>
-                                </tr>
-                                <tr>
                                     <td>enforce_srid_geom</td>
                                     <td>((st_srid(geom) &#61; 4326))</td>
                                 </tr>
                                 <tr>
                                     <td>enforce_dims_geom</td>
                                     <td>((st_ndims(geom) &#61; 2))</td>
+                                </tr>
+                                <tr>
+                                    <td>enforce_geotype_geom</td>
+                                    <td>(((geometrytype(geom) &#61; &#39;MULTIPOLYGON&#39;::text) OR (geometrytype(geom) &#61; &#39;POLYGON&#39;::text) OR (geom IS NULL)))</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -314,7 +314,7 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="geo_division.html" target="_top" title="geo_division" alt="" coords="5,5,313,251">
+<area shape="rect" id="node1" href="geo_division.html" target="_top" title="geo_division" alt="" coords="5,5,320,251">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/geo_division.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
