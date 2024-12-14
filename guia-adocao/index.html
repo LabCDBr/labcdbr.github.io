@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./courseai-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adoção de Soluções Digitais para Gestão Cultural</title>
+		<script>
+		window.getAPIHandle = function(handle) {
+			console.log("getAPIHandle");
+			return handle;
+		}
+		window.API_1484_11 = {
+    Initialize: function() { console.log("Mock 2004 Initialize"); return "true"; },
+    Terminate: function() { console.log("Mock 2004 Terminate"); return "true"; },
+    GetValue: function(key) {
+        console.log(`Mock 2004 GetValue called for key: ${key}`);
+        return "";
+    },
+    SetValue: function(key, value) {
+        console.log(`Mock 2004 SetValue called. Key: ${key}, Value: ${value}`);
+        return "true";
+    },
+    Commit: function() { console.log("Mock 2004 Commit"); return "true"; }
+};
+		</script>
+    <script type="module" crossorigin src="./assets/index-0bc13bb9.js"></script>
+    <link rel="stylesheet" href="./assets/index-e2796942.css">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- SCORM 1.2 files -->
+    <!-- <script src="./scripts/apiwrapper_custom.js" language="javascript"></script> -->
+    <!-- <script src="./scripts/scofunctions.js" language="javascript"></script> -->
+    <!-- SCORM 2004 files -->
+    <script src="./scripts/contentfunctions.js" language="javascript"></script>
+    <script src="./scripts/scormfunctions.js" language="javascript"></script>
+  </body>
+</html>
