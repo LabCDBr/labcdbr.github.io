@@ -79,10 +79,6 @@ function GetAPI(win)
 			GetDiagnostic: function () { return ""; }
 		};
 	}
-   if ((API == null) && (win.opener != null))
-   {
-      API = ScanForAPI(win.opener);
-   }
 }
 
 ///////////////////////////////////////////
