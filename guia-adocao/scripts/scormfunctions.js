@@ -52,7 +52,7 @@ function ScanForAPI(win)
 // provided API Instance.  The function takes in a parameter that
 // represents the current window.  The function is built to search in a
 // specific order and stop when the LMS provided API Instance is found.
-// The function begins by searching the current window�s parent, if the
+// The function begins by searching the current window’s parent, if the
 // current window has a parent.  If the API Instance is not found, the
 // function then checks to see if there are any opener windows.  If
 // the window has an opener, the function begins to look for the
@@ -63,6 +63,22 @@ function GetAPI(win)
    {
       API = ScanForAPI(win.parent);
    }
+   if (API == null) {
+		console.warn("No LMS API found. Using Mock LMS API.");
+		API = {
+			Initialize: function () { console.log("Mock LMSInitialize called"); return "true"; },
+			Finish: function () { console.log("Mock LMSFinish called"); return "true"; },
+			GetValue: function (key) { console.log(`Mock LMSGetValue for ${key}`); return ""; },
+			SetValue: function (key, value) {
+				console.log(`Mock LMSSetValue for ${key} with value ${value}`);
+				return "true";
+			},
+			Commit: function () { console.log("Mock LMSCommit called"); return "true"; },
+			GetLastError: function () { return "0"; },
+			GetErrorString: function () { return ""; },
+			GetDiagnostic: function () { return ""; }
+		};
+	}
    if ((API == null) && (win.opener != null))
    {
       API = ScanForAPI(win.opener);
